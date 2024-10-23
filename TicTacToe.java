@@ -34,6 +34,7 @@ public class TicTacToe {
                     sc.next();
                 }
             }
+            sc.nextLine();
 
             int row = (num - 1) / 3;
             int col = (num - 1) % 3;
@@ -60,6 +61,7 @@ public class TicTacToe {
             }
             if (!gameWon && isFieldFull(field)) {
                 System.out.println("It's a draw!");
+                gameWon = true;
             }
             showField(field);
         }
