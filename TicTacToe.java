@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class TicTacToe {
     static ArrayList<Player> players = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
         int[][] field = new int[3][3];
 
@@ -15,34 +15,13 @@ public class TicTacToe {
             }
         }
 
-        System.out.print("Player 1, enter your name: ");
-        String name = sc.nextLine();
-        while(name.isBlank()){
-            System.out.print("You didn't enter name. Try again: ");
-            name = sc.nextLine();
-        }
-        Player player = getPlayer(name);
-
-        if(player == null){
-            player = new Player(name);
-            players.add(player);
-        }
-
-        System.out.print("Player 2, enter your name: ");
-        String name2 = sc.nextLine();
-        while(name2.isBlank()){
-            System.out.print("You didn't enter name. Try again: ");
-            name2 = sc.nextLine();
-        }
-        Player player2 = getPlayer(name2);
-
-        if(player2 == null){
-            player2 = new Player(name2);
-            players.add(player2);
-        }
+        Player player1 = getPlayerName(1);
+        Player player2 = getPlayerName(2);
 
         showHintField();
-        showEmptyField(field);
+
+        boolean isPlayer1Turn = true;
+        boolean gameWon = false;
     }
 
     public static void showHintField(){
@@ -131,5 +110,20 @@ public class TicTacToe {
         for (Player p : playerArray) {
             System.out.println(p.getName() + " - Wins: " + p.getWins() + ", Losses: " + p.getLosses());
         }
+    }
+
+    public static Player getPlayerName(int playerNumber) {
+        System.out.printf("Player %d, enter your name: ", playerNumber);
+        String name = sc.nextLine();
+        while (name.isBlank()) {
+            System.out.print("You didn't enter a name. Try again: ");
+            name = sc.nextLine();
+        }
+        Player player = getPlayer(name);
+        if (player == null) {
+            player = new Player(name);
+            players.add(player);
+        }
+        return player;
     }
 }
