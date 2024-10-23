@@ -17,7 +17,7 @@ public class TicTacToe {
 
         while(!gameWon) {
             showHintField();
-            showEmptyField();
+            showField();
             System.out.printf("Player %d, enter a number", currentPlayer);
             int num = sc.nextInt();
 
@@ -43,10 +43,16 @@ public class TicTacToe {
         }
     }
 
-    public static void showEmptyField() {
+    public static void showField(int[][] field) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                System.out.print("⬜ ");
+                if (field[i][j] == 1){
+                    System.out.print("❌ ");
+                } else if (field[i][j] == 2){
+                    System.out.print("⭕ ");
+                } else {
+                    System.out.print("⬜ ");
+                }
             }
             System.out.println();
         }
