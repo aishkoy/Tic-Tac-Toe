@@ -24,7 +24,30 @@ public class TicTacToe {
             int row = (num - 1) / 3;
             int col = (num - 1) % 3;
 
-            currentPlayer = (currentPlayer == 1) ? 2 : 1;
+            if(field[row][col] == 0) {
+                field[row][col] = currentPlayer;
+                gameWon = checkWin(field, currentPlayer);
+
+                if(gameWon) {
+                    System.out.printf("Player %d wins!", currentPlayer);
+                    if(currentPlayer == 1) {
+                        player1.incrementWins();
+                        player2.incrementLosses();
+                    } else{
+                        player2.incrementWins();
+                        player1.incrementLosses();
+                    }
+                    displayLeaderboard();
+                } else{
+                    currentPlayer = (currentPlayer == 1) ? 2 : 1;
+                }
+            } else {
+                System.out.printf("This spot is already taken. Try again.");
+            }
+        }
+
+        if(!gameWon) {
+            System.out.println("It's a draw!");
         }
 
     }
