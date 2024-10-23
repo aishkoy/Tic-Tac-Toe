@@ -72,6 +72,17 @@ public class TicTacToe {
         return false;
     }
 
+    public static boolean isFieldFull(int[][] field) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (field[i][j] == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static Player getPlayer(String name) {
         for (Player p : players) {
             if (p.getName().equalsIgnoreCase(name)) {
