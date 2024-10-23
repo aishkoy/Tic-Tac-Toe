@@ -9,19 +9,24 @@ public class TicTacToe {
 
         int[][] field = new int[3][3];
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                field[i][j] = 0;
-            }
-        }
-
         Player player1 = getPlayerName(1);
         Player player2 = getPlayerName(2);
 
-        showHintField();
-
-        boolean isPlayer1Turn = true;
         boolean gameWon = false;
+        int currentPlayer = 1;
+
+        while(!gameWon) {
+            showHintField();
+            showEmptyField();
+            System.out.printf("Player %d, enter a number", currentPlayer);
+            int num = sc.nextInt();
+
+            int row = (num - 1) / 3;
+            int col = (num - 1) % 3;
+
+            currentPlayer = (currentPlayer == 1) ? 2 : 1;
+        }
+
     }
 
     public static void showHintField(){
@@ -38,7 +43,7 @@ public class TicTacToe {
         }
     }
 
-    public static void showEmptyField(int[][] field) {
+    public static void showEmptyField() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 System.out.print("⬜ ");
