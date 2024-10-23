@@ -15,10 +15,10 @@ public class TicTacToe {
         boolean gameWon = false;
         int currentPlayer = 1;
 
+        System.out.println("\nChoose a number from the hint field (1-9): ");
+        showHintField();
         while(!gameWon) {
-            showHintField();
-            showField(field);
-            System.out.printf("Player %d, enter a number", currentPlayer);
+            System.out.printf("\nPlayer %d, enter a number: ", currentPlayer);
             int num = sc.nextInt();
 
             int row = (num - 1) / 3;
@@ -29,7 +29,7 @@ public class TicTacToe {
                 gameWon = checkWin(field, currentPlayer);
 
                 if(gameWon) {
-                    System.out.printf("Player %d wins!", currentPlayer);
+                    System.out.printf("\nPlayer %d wins! %n", currentPlayer);
                     if(currentPlayer == 1) {
                         player1.incrementWins();
                         player2.incrementLosses();
@@ -37,19 +37,19 @@ public class TicTacToe {
                         player2.incrementWins();
                         player1.incrementLosses();
                     }
+                    System.out.println();
                     displayLeaderboard();
                 } else{
                     currentPlayer = (currentPlayer == 1) ? 2 : 1;
                 }
             } else {
-                System.out.printf("This spot is already taken. Try again.");
+                System.out.printf("This spot is already taken. Try again. %n");
             }
+            if (!gameWon && isFieldFull(field)) {
+                System.out.println("It's a draw!");
+            }
+            showField(field);
         }
-
-        if(!gameWon) {
-            System.out.println("It's a draw!");
-        }
-
     }
 
     public static void showHintField(){
