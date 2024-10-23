@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -19,7 +20,20 @@ public class TicTacToe {
         showHintField();
         while(!gameWon) {
             System.out.printf("\nPlayer %d, enter a number: ", currentPlayer);
-            int num = sc.nextInt();
+            int num = 0;
+            while (true) {
+                try {
+                    num = sc.nextInt();
+                    if (num >= 1 && num <= 9) {
+                        break;
+                    } else {
+                        System.out.print("Invalid number. Please choose between 1 and 9: ");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.print("Invalid input. Please enter a number: ");
+                    sc.next();
+                }
+            }
 
             int row = (num - 1) / 3;
             int col = (num - 1) % 3;
@@ -38,7 +52,6 @@ public class TicTacToe {
                         player1.incrementLosses();
                     }
                     System.out.println();
-                    displayLeaderboard();
                 } else{
                     currentPlayer = (currentPlayer == 1) ? 2 : 1;
                 }
@@ -49,6 +62,25 @@ public class TicTacToe {
                 System.out.println("It's a draw!");
             }
             showField(field);
+        }
+
+        boolean gameOver = true;
+        while(gameOver) {
+            System.out.print("\nDo you want to play again? (yes/no): ");
+            String answer = sc.nextLine();
+
+            if (answer.equalsIgnoreCase("no")) {
+                gameOver = false;
+                System.out.println("\nHere are the statistics of all players:");
+                displayLeaderboard();
+                System.out.println("\nThanks for playing!");
+                System.out.println("Goodbye!");
+            } else if (answer.equalsIgnoreCase("yes")) {
+                gameOver = false;
+                main(args);
+            } else {
+                System.out.print("Invalid input. Try again! ");
+            }
         }
     }
 
