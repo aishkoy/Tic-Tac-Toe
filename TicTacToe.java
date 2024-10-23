@@ -70,11 +70,11 @@ public class TicTacToe {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (field[i][j] == 1){
-                    System.out.print("❌ ");
+                    System.out.print("[x]");
                 } else if (field[i][j] == 2){
-                    System.out.print("⭕ ");
+                    System.out.print("[o]");
                 } else {
-                    System.out.print("⬜ ");
+                    System.out.print("[ ]");
                 }
             }
             System.out.println();
