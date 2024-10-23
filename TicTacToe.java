@@ -17,7 +17,7 @@ public class TicTacToe {
 
         while(!gameWon) {
             showHintField();
-            showField();
+            showField(field);
             System.out.printf("Player %d, enter a number", currentPlayer);
             int num = sc.nextInt();
 
@@ -56,6 +56,20 @@ public class TicTacToe {
             }
             System.out.println();
         }
+    }
+
+    public static boolean checkWin(int[][] field, int currentPlayer){
+        for (int i = 0; i < 3; i++) {
+            if (field[i][0] == currentPlayer && field[i][1] == currentPlayer && field[i][2] == currentPlayer)
+                return true;
+            if (field[0][i] == currentPlayer && field[1][i] == currentPlayer && field[2][i] == currentPlayer)
+                return true;
+        }
+        if (field[0][0] == currentPlayer && field[1][1] == currentPlayer && field[2][2] == currentPlayer)
+            return true;
+        if (field[0][2] == currentPlayer && field[1][1] == currentPlayer && field[2][0] == currentPlayer)
+            return true;
+        return false;
     }
 
     public static Player getPlayer(String name) {
